@@ -1,0 +1,21 @@
+name: EXE Oluşturucu
+on: [push] # Kodu her güncellediğinde çalışır
+
+jobs:
+  build:
+    runs-on: windows-latest # GitHub senin için bir Windows açar
+    steps:
+    - uses: actions/checkout@v3
+    - name: Python Kur
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Paketle
+      run: |
+        pip install pyinstaller
+        pyinstaller --onefile --windowed main.py
+    - name: Dosyayı Yükle
+      uses: actions/upload-artifact@v3
+      with:
+        name: programim-exe
+        path: dist/main.exe
